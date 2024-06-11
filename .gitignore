@@ -1,0 +1,21 @@
+# Enable "build/" folder in the NuGet Packages folder since NuGet packages
+# use it for MSBuild targets
+![Bb]uild/
+ 
+# Comment to suppress "COMMIT_EDITMSG"
+.vs/
+.vscode/
+.history/
+ 
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+ 
+# Folder config file
+Desktop.ini
+ 
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+ 
+# VS Code directories
+.vscode/

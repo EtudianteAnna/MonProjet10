@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Patient_Services.Migrations
+namespace PatientService.Migrations
 {
     public partial class InitialCreate : Migration
     {

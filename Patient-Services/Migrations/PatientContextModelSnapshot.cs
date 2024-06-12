@@ -7,7 +7,7 @@ using PatientService.Data;
 
 #nullable disable
 
-namespace Patient_Services.Migrations
+namespace PatientService.Migrations
 {
     [DbContext(typeof(PatientContext))]
     partial class PatientContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace Patient_Services.Migrations
                 .HasAnnotation("ProductVersion", "6.0.31")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Patient_Services.Models.Patient", b =>
+            modelBuilder.Entity("PatientService.Models.Patient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

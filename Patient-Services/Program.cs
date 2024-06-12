@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PatientService.Data;
+using PatientService.Repositories;
+using PatientService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,10 @@ builder.Services.AddDbContext<PatientContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 23)))); // Mettre la version MySQL appropriée
 
+// Ajouter les services et les repositories
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IPatientService, PatientService.Services.PatientService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +27,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Patient API V1");
+        c.RoutePrefix = string.Empty; // Pour accéder à Swagger directement à la racine de l'URL
+    });
 }
 
 app.UseHttpsRedirection();

@@ -27,7 +27,7 @@ namespace PatientService.Controllers
 
         // GET: api/Patients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Patient>> GetPatient(int id)
+        public async Task<ActionResult<Patient>> GetPatient(string id)
         {
             var patient = await _service.GetPatientById(id);
             if (patient == null)
@@ -41,13 +41,15 @@ namespace PatientService.Controllers
         [HttpPost]
         public async Task<ActionResult<Patient>> PostPatient(Patient patient)
         {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
             var newPatient = await _service.AddPatient(patient);
+
             return CreatedAtAction("GetPatient", new { id = newPatient.Id }, newPatient);
         }
 
         // PUT: api/Patients/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPatient(int id, Patient patient)
+        public async Task<IActionResult> PutPatient(string id, Patient patient)
         {
             if (id != patient.Id)
             {
@@ -60,7 +62,7 @@ namespace PatientService.Controllers
 
         // DELETE: api/Patients/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePatient(int id)
+        public async Task<IActionResult> DeletePatient(string id)
         {
             await _service.DeletePatient(id);
             return NoContent();

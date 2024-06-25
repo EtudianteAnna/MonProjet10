@@ -1,16 +1,35 @@
-﻿namespace PatientService.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace PatientService.Models
 {
-    public class Patient
-    {
-        public int Id { get; set; } //sans ID doublons et pour différencier les lignes dans la BDD
-        public string FirstName { get; set; }
 
-        public string LastName { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string Gender { get; set; }
+        public class Patient
+        {
+            public string Id { get; set; }
 
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
-        
-    }
+            [Required]
+            [StringLength(50)]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(50)]
+            public string LastName { get; set; }
+
+            [Required]
+            public DateTime BirthDate { get; set; }
+
+            [Required]
+            [StringLength(10)]
+            public string Gender { get; set; }
+
+            [Required]
+            [StringLength(100)]
+            public string Address { get; set; }
+
+            [Required]
+            [Phone]
+            public string PhoneNumber { get; set; }
+        }
+    
 }

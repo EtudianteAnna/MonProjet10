@@ -19,7 +19,7 @@ namespace PatientService.Services
             return await _repository.GetAllPatients();
         }
 
-        public async Task<Patient> GetPatientById(int id)
+        public async Task<Patient> GetPatientById(string id)
         {
             return await _repository.GetPatientById(id);
         }
@@ -34,7 +34,7 @@ namespace PatientService.Services
             return await _repository.UpdatePatient(patient);
         }
 
-        public async Task DeletePatient(int id)
+        public async Task DeletePatient(string id)
         {
             await _repository.DeletePatient(id);
         }

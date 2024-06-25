@@ -7,9 +7,9 @@ namespace PatientService.Services
     public interface IPatientService
     {
         Task<IEnumerable<Patient>> GetAllPatients();
-        Task<Patient> GetPatientById(int id);
+        Task<Patient> GetPatientById(string id);
         Task<Patient> AddPatient(Patient patient);
         Task<Patient> UpdatePatient(Patient patient);
-        Task DeletePatient(int id);
+        Task DeletePatient(string id);
     }
 }

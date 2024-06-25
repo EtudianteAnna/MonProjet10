@@ -21,7 +21,7 @@ namespace PatientService.Repositories
             return await _context.Patients.ToListAsync();
         }
 
-        public async Task<Patient> GetPatientById(int id)
+        public async Task<Patient> GetPatientById(string id)
         {
             return await _context.Patients.FindAsync(id);
         }
@@ -40,7 +40,7 @@ namespace PatientService.Repositories
             return patient;
         }
 
-        public async Task DeletePatient(int id)
+        public async Task DeletePatient(string id)
         {
             var patient = await _context.Patients.FindAsync(id);
             if (patient != null)

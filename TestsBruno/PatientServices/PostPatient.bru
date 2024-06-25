@@ -1,0 +1,22 @@
+meta {
+  name: PostPatient
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:7081/api/patients
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "firstName": "Nader",
+      "lastName": "chrigui",
+      "birthDate": "1998-01-01",
+      "gender": "Male",
+      "address": "789 Oak St",
+      "phoneNumber": "555-1234"
+  }
+}

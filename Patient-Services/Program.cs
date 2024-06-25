@@ -3,6 +3,7 @@ using PatientService.Data;
 using PatientService.Repositories;
 using PatientService.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\MediacalNotes-Service.props" />
+</Project>

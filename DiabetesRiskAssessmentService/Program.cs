@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Diabetes Risk Assessment API V1");
-        c.RoutePrefix = string.Empty; // Pour accéder à Swagger directement à la racine de l'URL
+        
     });
 }
 

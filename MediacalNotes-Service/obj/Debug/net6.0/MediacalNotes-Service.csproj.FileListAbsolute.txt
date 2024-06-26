@@ -1,13 +1,6 @@
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.csproj.AssemblyReference.cache
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.AssemblyInfoInputs.cache
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.AssemblyInfo.cs
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.csproj.CoreCompileInputs.cache
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.sourcelink.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\appsettings.json
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\Notes\bruno.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\MediacalNotes-Service.exe
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\MediacalNotes-Service.deps.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\MediacalNotes-Service.runtimeconfig.json
@@ -36,6 +29,14 @@ C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.csproj.AssemblyReference.cache
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.AssemblyInfoInputs.cache
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.AssemblyInfo.cs
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.csproj.CoreCompileInputs.cache
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.sourcelink.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\staticwebassets\msbuild.MediacalNotes-Service.Microsoft.AspNetCore.StaticWebAssets.props
@@ -50,4 +51,3 @@ C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.pdb
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\MediacalNotes-Service.genruntimeconfig.cache
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\obj\Debug\net6.0\ref\MediacalNotes-Service.dll
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\Notes\bruno.json

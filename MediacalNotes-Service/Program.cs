@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using MedicalNotesService.Data;
 using MedicalNotesService.Models;
 using MedicalNotesService.Repositories;
 using MedicalNotesService.Services;
-using Microsoft.Extensions.Options;
-namespace MediacalNotes_Service
+using Microsoft.Extensions.Logging;
+
+namespace MedicalNotesService
 {
     public class Program
     {
@@ -25,6 +23,10 @@ namespace MediacalNotes_Service
             builder.Services.AddScoped<INoteRepository, NoteRepository>();
             builder.Services.AddScoped<INoteService, NoteService>();
 
+            // Add Swagger
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
             // Add the following line to support logging
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();
@@ -35,6 +37,12 @@ namespace MediacalNotes_Service
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Medical Notes API V1");
+                    c.RoutePrefix = string.Empty; // To access Swagger directly at the root URL
+                });
             }
 
             app.UseHttpsRedirection();
@@ -44,7 +52,7 @@ namespace MediacalNotes_Service
             app.MapControllers();
 
             app.Run();
-
         }
     }
 }
+

@@ -1,13 +1,6 @@
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.csproj.AssemblyReference.cache
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.AssemblyInfoInputs.cache
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.AssemblyInfo.cs
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.csproj.CoreCompileInputs.cache
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.sourcelink.json
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\appsettings.json
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\Diabete\bruno.json
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\DiabetesRiskAssessmentService.exe
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\DiabetesRiskAssessmentService.deps.json
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\DiabetesRiskAssessmentService.runtimeconfig.json
@@ -41,6 +34,14 @@ C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.csproj.AssemblyReference.cache
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.AssemblyInfoInputs.cache
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.AssemblyInfo.cs
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.csproj.CoreCompileInputs.cache
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.sourcelink.json
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\staticwebassets\msbuild.DiabetesRiskAssessmentService.Microsoft.AspNetCore.StaticWebAssets.props
@@ -55,4 +56,3 @@ C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.pdb
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\DiabetesRiskAssessmentService.genruntimeconfig.cache
 C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\obj\Debug\net6.0\ref\DiabetesRiskAssessmentService.dll
-C:\Users\A154NF\source\repos\MonProjet10\DiabetesRiskAssessmentService\bin\Debug\net6.0\Diabete\bruno.json

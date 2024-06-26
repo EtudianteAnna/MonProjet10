@@ -1,0 +1,23 @@
+meta {
+  name: PostPatient
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:5106/api/ApiGateway/patients
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "Id": "6",
+    "FirstName": "anna",
+    "LastName": "Doe",
+    "BirthDate": "1980-01-01T00:00:00",
+    "Gender": "Male",
+    "Address": "123 Main St",
+    "PhoneNumber": "123-456-7890"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "dpH+QAKhnko=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\A154NF\\source\\repos\\MonProjet10\\MicroFrontEnd\\MicroFrontEnd.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\A154NF\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

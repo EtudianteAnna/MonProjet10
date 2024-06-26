@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ApiGateway.DTO;
 using System.Text;
+
 namespace ApiGateway.Controllers
 {
     [Route("api/[controller]")]
@@ -45,13 +46,12 @@ namespace ApiGateway.Controllers
             return CreatedAtAction(nameof(GetPatients), new { id = createdPatient }, createdPatient);
         }
 
-
-        // GET: api/ApiGateway/notes
-        [HttpGet("notes")]
-        public async Task<IActionResult> GetNotes()
+        // GET: api/ApiGateway/notes/patient/{patientId}
+        [HttpGet("notes/patient/{patientId}")]
+        public async Task<IActionResult> GetNotesByPatientId(string patientId)
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("http://localhost:6200/api/notes");
+            var response = await client.GetAsync($"http://localhost:6200/api/notes/patient/{patientId}");
             if (!response.IsSuccessStatusCode)
             {
                 return StatusCode((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
@@ -73,7 +73,6 @@ namespace ApiGateway.Controllers
             var createdNote = await response.Content.ReadAsStringAsync();
             return CreatedAtAction(nameof(GetNotes), new { id = createdNote }, createdNote);
         }
-
 
         // GET: api/ApiGateway/riskassessment/{patientId}
         [HttpGet("riskassessment/{patientId}")]

@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using MicroFrontEnd.Models;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using MicroFrontEnd.Models;
 
 namespace MicroFrontEnd.Controllers
 {
@@ -46,17 +47,54 @@ namespace MicroFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                var client = _clientFactory.CreateClient();
-                var jsonContent = JsonConvert.SerializeObject(patient);
-                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:5106/api/ApiGateway/patients");
+                request.Content = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync("http://localhost:5106/api/ApiGateway/patients", content);
+                var client = _clientFactory.CreateClient();
+                var response = await client.SendAsync(request);
+
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction(nameof(Index));
                 }
             }
             return View(patient);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNotes(string patientId)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:5106/api/ApiGateway/notes/patient/{patientId}");
+            var client = _clientFactory.CreateClient();
+
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseString = await response.Content.ReadAsStringAsync();
+                var notes = JsonConvert.DeserializeObject<IEnumerable<Note>>(responseString);
+                return Json(notes);
+            }
+            else
+            {
+                return Json(new List<Note>());
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNote([FromBody] Note note)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:5106/api/ApiGateway/notes");
+            request.Content = new StringContent(JsonConvert.SerializeObject(note), Encoding.UTF8, "application/json");
+
+            var client = _clientFactory.CreateClient();
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+            return StatusCode((int)response.StatusCode);
         }
     }
 }

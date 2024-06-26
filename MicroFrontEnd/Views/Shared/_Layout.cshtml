@@ -1,67 +1,28 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>@ViewData["Title"] - MicroFrontEnd</title>
-
+    <title>@ViewData["Title"] - YourAppName</title>
     <link rel="stylesheet" href="~/css/site.css" />
-
 </head>
-
 <body>
-
+    <header>
+        <nav>
+            <ul>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a href="@Url.Action("Index", "Patients")">Patients</a></li>
+                <!-- Ajoutez d'autres liens de navigation ici -->
+            </ul>
+        </nav>
+    </header>
     <div class="container">
-
-        <header>
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-                <a class="navbar-brand" href="#">MicroFrontEnd</a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-
-                    <span class="navbar-toggler-icon"></span>
-
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-
-                    <ul class="navbar-nav">
-
-                        <li class="nav-item">
-
-                            <a class="nav-link" asp-controller="Patients" asp-action="Index">Patients</a>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            </nav>
-
-        </header>
-
-        <main role="main" class="pb-3">
-
-            @RenderBody()
-
-        </main>
-
+        @RenderBody()
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <footer>
+        <p>&copy; 2023 - YourAppName</p>
+    </footer>
+    @RenderSection("Scripts", required: false)
 </body>
-
 </html>
+

@@ -1,120 +1,128 @@
-@model IEnumerable<MicroFrontEnd.Models.Patient>
-
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Patients List</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <h2>Patients List</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Birth Date</th>
-                        <th>Gender</th>
-                        <th>Address</th>
-                        <th>Phone Number</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var patient in Model)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Patients List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Patients List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birth Date</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var patient in Model)
                 {
-                    <tr class="patient-row" data-id="@patient.Id">
-                        <td>@patient.FirstName</td>
-                        <td>@patient.LastName</td>
-                        <td>@patient.BirthDate.ToShortDateString()</td>
-                        <td>@patient.Gender</td>
-                        <td>@patient.Address</td>
-                        <td>@patient.PhoneNumber</td>
-                    </tr>
+                <tr class="patient-row" data-id="@patient.Id">
+                    <td>@patient.FirstName</td>
+                    <td>@patient.LastName</td>
+                    <td>@patient.BirthDate.ToShortDateString()</td>
+                    <td>@patient.Gender</td>
+                    <td>@patient.Address</td>
+                    <td>@patient.PhoneNumber</td>
+                </tr>
                 }
-                </tbody>
-            </table>
-            <h2>Notes for Patient</h2>
-            <table class="table" id="notesTable">
-                <thead>
-                    <tr>
-                        <th>Doctor Id</th>
-                        <th>Content</th>
-                        <th>Created Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Notes will be populated here -->
-                </tbody>
-            </table>
-            <button id="addNoteButton" class="btn btn-primary" style="display:none;">Add Note</button>
-            <div id="addNoteForm" style="display:none;">
-                <h3>Add Note</h3>
-                <form id="createNoteForm">
-                    <input type="hidden" id="patientId" name="PatientId" />
-                    <div class="form-group">
-                        <label for="DoctorId">Doctor Id:</label>
-                        <input type="text" id="DoctorId" name="DoctorId" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="Content">Content:</label>
+            </tbody>
+        </table>
+        <h2>Notes for Patient</h2>
+        <table class="table" id="notesTable">
+            <thead>
+                <tr>
+                    <th>Doctor Id</th>
+                    <th>Content</th>
+                    <th>Created Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Notes will be populated here -->
+            </tbody>
+        </table>
+        <button id="addNoteButton" class="btn btn-primary" style="display:none;">Add Note</button>
+        <div id="addNoteForm" style="display:none;">
+            <h3>Add Note</h3>
+            <form id="createNoteForm">
+                <input type="hidden" id="noteId" name="Id" />
+                <input type="hidden" id="patientId" name="PatientId" />
+                <div class="form-group">
+                    <label for="DoctorId">Doctor Id:</label>
+                    <input type="text" id="DoctorId" name="DoctorId" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Content">Content:</label>
 <textarea id="Content" name="Content" class="form-control"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
+    </div>
 
-        @section Scripts {
-            <script>
-                $(document).ready(function () {
-                    $(".patient-row").click(function () {
-                        var patientId = $(this).data("id");
-                        console.log("Patient ID: " + patientId); // Afficher l'ID du patient dans la console
-                        $("#patientId").val(patientId);
-                        $.get("/Patients/GetNotes?patientId=" + patientId, function (data) {
-                            console.log("Notes Data: ", data); // Afficher les données des notes dans la console pour vérification
-                            var notesTable = $("#notesTable tbody");
-                            notesTable.empty();
-                            data.forEach(function (note) {
-                                notesTable.append("<tr><td>" + note.doctorId + "</td><td>" + note.content + "</td><td>" + new Date(note.createdDate).toLocaleDateString() + "</td></tr>");
-                            });
-                            $("#addNoteButton").show();
-                        }).fail(function (xhr, status, error) {
-                            console.error("Erreur lors de la récupération des notes: ", error);
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $(".patient-row").click(function () {
+                    var patientId = $(this).data("id");
+                    console.log("Patient ID: " + patientId); // Afficher l'ID du patient dans la console
+                    $("#patientId").val(patientId);
+                    $.get("/Patients/GetNotes?patientId=" + patientId, function (data) {
+                        console.log("Notes Data: ", data); // Afficher les données des notes dans la console pour vérification
+                        var notesTable = $("#notesTable tbody");
+                        notesTable.empty();
+                        data.forEach(function (note) {
+                            notesTable.append("<tr><td>" + note.doctorId + "</td><td>" + note.content + "</td><td>" + new Date(note.createdDate).toLocaleDateString() + "</td></tr>");
                         });
-                    });
-
-                    $("#addNoteButton").click(function () {
-                        $("#addNoteForm").toggle();
-                    });
-
-                    $("#createNoteForm").submit(function (event) {
-                        event.preventDefault();
-                        var note = {
-                            PatientId: $("#patientId").val(),
-                            DoctorId: $("#DoctorId").val(),
-                            Content: $("#Content").val()
-                        };
-                        $.ajax({
-                            url: "/Patients/AddNote",
-                            method: "POST",
-                            contentType: "application/json",
-                            data: JSON.stringify(note),
-                            success: function () {
-                                alert("Note added successfully!");
-                                $("#addNoteForm").hide();
-                                $("#createNoteForm")[0].reset();
-                            },
-                            error: function (xhr, status, error) {
-                                console.error("Erreur lors de l'ajout de la note: ", error);
-                            }
-                        });
+                        $("#addNoteButton").show();
+                    }).fail(function (xhr, status, error) {
+                        console.error("Erreur lors de la récupération des notes: ", error);
                     });
                 });
-            </script>
-        }
-    </body>
+
+                $("#addNoteButton").click(function () {
+                    $("#addNoteForm").toggle();
+                });
+
+                function generateObjectId() {
+                    var timestamp = Math.floor(new Date().getTime() / 1000).toString(16);
+                    var objectId = timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
+                        return (Math.random() * 16 | 0).toString(16);
+                    }).toLowerCase();
+                    return objectId;
+                }
+
+                $("#createNoteForm").submit(function (event) {
+                    event.preventDefault();
+                    var note = {
+                        Id: generateObjectId(),
+                        PatientId: $("#patientId").val(),
+                        DoctorId: $("#DoctorId").val(),
+                        Content: $("#Content").val()
+                    };
+                    $.ajax({
+                        url: "/Patients/AddNote",
+                        method: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(note),
+                        success: function () {
+                            alert("Note added successfully!");
+                            $("#addNoteForm").hide();
+                            $("#createNoteForm")[0].reset();
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Erreur lors de l'ajout de la note: ", error);
+                        }
+                    });
+                });
+            });
+        </script>
+    }
+</body>
 </html>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MicroFrontEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0f73c29c3ac0d3427a10489ae10df9449779caf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d9d26643b2008f436db11ac1e77b700d341726b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MicroFrontEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MicroFrontEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

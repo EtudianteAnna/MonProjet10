@@ -84,6 +84,10 @@ namespace MicroFrontEnd.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNote([FromBody] Note note)
         {
+            // Log the received note object
+            Console.WriteLine("Received Note:");
+            Console.WriteLine(JsonConvert.SerializeObject(note));
+
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:5106/api/ApiGateway/notes");
             request.Content = new StringContent(JsonConvert.SerializeObject(note), Encoding.UTF8, "application/json");
 
@@ -94,7 +98,13 @@ namespace MicroFrontEnd.Controllers
             {
                 return Ok();
             }
-            return StatusCode((int)response.StatusCode);
+
+            // Log the response status and content if the request fails
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("Response Status: " + response.StatusCode);
+            Console.WriteLine("Response Content: " + responseContent);
+
+            return StatusCode((int)response.StatusCode, responseContent);
         }
     }
 }

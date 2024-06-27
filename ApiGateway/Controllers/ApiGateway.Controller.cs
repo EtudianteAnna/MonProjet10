@@ -77,6 +77,7 @@ namespace ApiGateway.Controllers
         [HttpPost("notes")]
         public async Task<IActionResult> CreateNote([FromBody] NoteDTO note)
         {
+            note.CreatedDate = DateTime.UtcNow;
             var client = _httpClientFactory.CreateClient();
             var content = new StringContent(JsonConvert.SerializeObject(note), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("http://localhost:6200/api/notes", content);

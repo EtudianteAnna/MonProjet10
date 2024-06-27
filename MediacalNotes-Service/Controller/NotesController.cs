@@ -46,6 +46,7 @@ namespace MedicalNotesService.Controllers
         [HttpPost]
         public async Task<ActionResult<Note>> CreateNote(Note note)
         {
+            note.CreatedDate = DateTime.UtcNow;
             await _noteService.CreateNoteAsync(note);
             return CreatedAtAction(nameof(GetNoteById), new { id = note.Id }, note);
         }

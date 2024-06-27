@@ -1,129 +1,188 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Patients List</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <h2>Patients List</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Birth Date</th>
-                    <th>Gender</th>
-                    <th>Address</th>
-                    <th>Phone Number</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var patient in Model)
-                {
-                <tr class="patient-row" data-id="@patient.Id">
-                    <td>@patient.FirstName</td>
-                    <td>@patient.LastName</td>
-                    <td>@patient.BirthDate.ToShortDateString()</td>
-                    <td>@patient.Gender</td>
-                    <td>@patient.Address</td>
-                    <td>@patient.PhoneNumber</td>
-                </tr>
-                }
-            </tbody>
-        </table>
-        <h2>Notes for Patient</h2>
-        <table class="table" id="notesTable">
-            <thead>
-                <tr>
-                    <th>Doctor Id</th>
-                    <th>Content</th>
-                    <th>Created Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Notes will be populated here -->
-            </tbody>
-        </table>
-        <button id="addNoteButton" class="btn btn-primary" style="display:none;">Add Note</button>
-        <div id="addNoteForm" style="display:none;">
-            <h3>Add Note</h3>
-            <form id="createNoteForm">
-                <input type="hidden" id="noteId" name="Id" />
-                <input type="hidden" id="patientId" name="PatientId" />
-                <div class="form-group">
-                    <label for="DoctorId">Doctor Id:</label>
-                    <input type="text" id="DoctorId" name="DoctorId" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="Content">Content:</label>
+@model IEnumerable<MicroFrontEnd.Models.Patient>
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Patients List</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Patients List</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Birth Date</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var patient in Model)
+        {
+                    <tr class="patient-row" data-id="@patient.Id">
+                        <td><input type="text" class="form-control" value="@patient.FirstName" readonly /></td>
+                        <td><input type="text" class="form-control" value="@patient.LastName" readonly /></td>
+                        <td><input type="date" class="form-control" value="@patient.BirthDate.ToString("yyyy-MM-dd")" readonly /></td>
+                        <td>
+                            @patient.Gender
+                        </td>
+                        <td><input type="text" class="form-control" value="@patient.Address" readonly /></td>
+                        <td><input type="text" class="form-control" value="@patient.PhoneNumber" readonly /></td>
+                        <td>
+                            <button class="btn btn-warning edit-btn">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-success save-btn" style="display:none;">
+                                <i class="fas fa-save"></i> Save
+                            </button>
+                        </td>
+                    </tr>
+        }
+                </tbody>
+            </table>
+
+            <button class="btn btn-primary" id="addPatientBtn">
+                <i class="fas fa-user-plus"></i> Add Patient
+            </button>
+
+            <h2>Notes for Patient</h2>
+            <table class="table" id="notesTable">
+                <thead>
+                    <tr>
+                        <th>Doctor Id</th>
+                        <th>Content</th>
+                        <th>Created Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Notes will be populated here -->
+                </tbody>
+            </table>
+            <button id="addNoteButton" class="btn btn-primary" style="display:none;">Add Note</button>
+            <div id="addNoteForm" style="display:none;">
+                <h3>Add Note</h3>
+                <form id="createNoteForm">
+                    <input type="hidden" id="patientId" name="PatientId" />
+                    <div class="form-group">
+                        <label for="DoctorId">Doctor Id:</label>
+                        <input type="text" id="DoctorId" name="DoctorId" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Content">Content:</label>
 <textarea id="Content" name="Content" class="form-control"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
 
-    </div>
-    <a asp-action="Create" class="btn btn-success mt-3">Add Patient</a>
-    @section Scripts {
-        <script>
-            $(document).ready(function () {
-                $(".patient-row").click(function () {
-                    var patientId = $(this).data("id");
-                    console.log("Patient ID: " + patientId); // Afficher l'ID du patient dans la console
-                    $("#patientId").val(patientId);
-                    $.get("/Patients/GetNotes?patientId=" + patientId, function (data) {
-                        console.log("Notes Data: ", data); // Afficher les données des notes dans la console pour vérification
-                        var notesTable = $("#notesTable tbody");
-                        notesTable.empty();
-                        data.forEach(function (note) {
-                            notesTable.append("<tr><td>" + note.doctorId + "</td><td>" + note.content + "</td><td>" + new Date(note.createdDate).toLocaleDateString() + "</td></tr>");
-                        });
-                        $("#addNoteButton").show();
-                    }).fail(function (xhr, status, error) {
-                        console.error("Erreur lors de la récupération des notes: ", error);
+        @section Scripts {
+            <script>
+        $(document).ready(function () {
+            $(".patient-row").click(function () {
+                var patientId = $(this).data("id");
+                console.log("Patient ID: " + patientId); // Afficher l'ID du patient dans la console
+                $("#patientId").val(patientId);
+                $.get("/Patients/GetNotes?patientId=" + patientId, function (data) {
+                    console.log("Notes Data: ", data); // Afficher les données des notes dans la console pour vérification
+                    var notesTable = $("#notesTable tbody");
+                    notesTable.empty();
+                    data.forEach(function (note) {
+                        notesTable.append("<tr><td>" + note.doctorId + "</td><td>" + note.content + "</td><td>" + new Date(note.createdDate).toLocaleDateString() + "</td></tr>");
                     });
-                });
-
-                $("#addNoteButton").click(function () {
-                    $("#addNoteForm").toggle();
-                });
-
-                function generateObjectId() {
-                    var timestamp = Math.floor(new Date().getTime() / 1000).toString(16);
-                    var objectId = timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
-                        return (Math.random() * 16 | 0).toString(16);
-                    }).toLowerCase();
-                    return objectId;
-                }
-
-                $("#createNoteForm").submit(function (event) {
-                    event.preventDefault();
-                    var note = {
-                        Id: generateObjectId(),
-                        PatientId: $("#patientId").val(),
-                        DoctorId: $("#DoctorId").val(),
-                        Content: $("#Content").val()
-                    };
-                    $.ajax({
-                        url: "/Patients/AddNote",
-                        method: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify(note),
-                        success: function () {
-                            alert("Note added successfully!");
-                            $("#addNoteForm").hide();
-                            $("#createNoteForm")[0].reset();
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("Erreur lors de l'ajout de la note: ", error);
-                        }
-                    });
+                    $("#addNoteButton").show();
+                }).fail(function (xhr, status, error) {
+                    console.error("Erreur lors de la récupération des notes: ", error);
                 });
             });
-        </script>
-    }
-</body>
+
+            $("#addNoteButton").click(function () {
+                $("#addNoteForm").toggle();
+            });
+
+            $("#createNoteForm").submit(function (event) {
+                event.preventDefault();
+                var note = {
+                    Id: generateUUID(),
+                    PatientId: $("#patientId").val(),
+                    DoctorId: $("#DoctorId").val(),
+                    Content: $("#Content").val()
+                };
+                $.ajax({
+                    url: "/Patients/AddNote",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(note),
+                    success: function () {
+                        alert("Note added successfully!");
+                        $("#addNoteForm").hide();
+                        $("#createNoteForm")[0].reset();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Erreur lors de l'ajout de la note: ", error);
+                    }
+                });
+            });
+
+            $(".edit-btn").click(function () {
+                var row = $(this).closest("tr");
+                row.find("input, select").prop("readonly", false).prop("disabled", false);
+                row.find("select").prop("disabled", true); // Disable the gender field
+                $(this).hide();
+                row.find(".save-btn").show();
+            });
+
+            $(".save-btn").click(function () {
+                var row = $(this).closest("tr");
+                var patientId = row.data("id");
+                var patient = {
+                    Id: patientId,
+                    FirstName: row.find("input:eq(0)").val(),
+                    LastName: row.find("input:eq(1)").val(),
+                    BirthDate: row.find("input:eq(2)").val(),
+                    Gender: row.find("td:eq(3)").text().trim(), // Use the displayed gender text
+                    Address: row.find("input:eq(3)").val(),
+                    PhoneNumber: row.find("input:eq(4)").val()
+                };
+
+                $.ajax({
+                    url: "/Patients/Edit",
+                    method: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify(patient),
+                    success: function () {
+                        alert("Patient updated successfully!");
+                        row.find("input, select").prop("readonly", true).prop("disabled", true);
+                        row.find(".save-btn").hide();
+                        row.find(".edit-btn").show();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Erreur lors de la mise à jour du patient: ", error);
+                    }
+                });
+            });
+
+            $("#addPatientBtn").click(function () {
+                window.location.href = '@Url.Action("Create", "Patients")';
+            });
+        });
+
+        function generateUUID() {
+            // Generate a UUID
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+            </script>
+        }
+    </body>
 </html>

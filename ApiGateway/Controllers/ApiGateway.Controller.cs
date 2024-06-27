@@ -45,7 +45,22 @@ namespace ApiGateway.Controllers
             var createdPatient = await response.Content.ReadAsStringAsync();
             return CreatedAtAction(nameof(GetPatients), new { id = createdPatient }, createdPatient);
         }
- 
+
+        [HttpPut("patients/{id}")]
+        public async Task<IActionResult> UpdatePatient(string id, [FromBody] PatientDTO patient)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var content = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
+            var response = await client.PutAsync($"http://localhost:3001/api/patients/{id}", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+
+            return NoContent();
+        }
+
         // GET: api/ApiGateway/notes
         [HttpGet("notes")]
         public async Task<IActionResult> GetNotes()

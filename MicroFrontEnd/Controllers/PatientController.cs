@@ -61,6 +61,29 @@ namespace MicroFrontEnd.Controllers
             return View(patient);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] Patient patient)
+        {
+            if (patient == null)
+            {
+                return BadRequest("Patient data is null.");
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Put, $"http://localhost:5106/api/ApiGateway/patients/{patient.Id}");
+            request.Content = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
+
+            var client = _clientFactory.CreateClient();
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+
+            return StatusCode((int)response.StatusCode);
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> GetNotes(string patientId)
         {

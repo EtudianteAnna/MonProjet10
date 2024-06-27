@@ -10,19 +10,19 @@
         }
       ],
       "UpstreamPathTemplate": "/api/ApiGateway/patients",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/notes",
+      "DownstreamPathTemplate": "/api/patients/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 6200
+          "Port": 3001
         }
       ],
-      "UpstreamPathTemplate": "/api/ApiGateway/notes",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamPathTemplate": "/api/ApiGateway/patients/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
     },
     {
       "DownstreamPathTemplate": "/api/notes/patient/{patientId}",
@@ -34,7 +34,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/ApiGateway/notes/patient/{patientId}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/riskassessment/{patientId}",
@@ -46,7 +46,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/ApiGateway/riskassessment/{patientId}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "GET" ]
     }
   ],
   "GlobalConfiguration": {

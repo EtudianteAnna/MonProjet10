@@ -25,6 +25,18 @@
       "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
+      "DownstreamPathTemplate": "/api/notes/patient/{patientId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 6200
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ApiGateway/notes/patient/{patientId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/riskassessment/{patientId}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

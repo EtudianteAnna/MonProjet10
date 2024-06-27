@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ApiGateway.DTO;
 using System.Text;
-
+ 
 namespace ApiGateway.Controllers
 {
     [Route("api/[controller]")]
@@ -12,12 +12,12 @@ namespace ApiGateway.Controllers
     public class ApiGatewayController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
+ 
         public ApiGatewayController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-
+ 
         // GET: api/ApiGateway/patients
         [HttpGet("patients")]
         public async Task<IActionResult> GetPatients()
@@ -31,7 +31,7 @@ namespace ApiGateway.Controllers
             var patients = await response.Content.ReadAsStringAsync();
             return Ok(JsonConvert.DeserializeObject(patients));
         }
-
+ 
         [HttpPost("patients")]
         public async Task<IActionResult> CreatePatient([FromBody] PatientDTO patient)
         {
@@ -45,7 +45,21 @@ namespace ApiGateway.Controllers
             var createdPatient = await response.Content.ReadAsStringAsync();
             return CreatedAtAction(nameof(GetPatients), new { id = createdPatient }, createdPatient);
         }
-
+ 
+        // GET: api/ApiGateway/notes
+        [HttpGet("notes")]
+        public async Task<IActionResult> GetNotes()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync("http://localhost:6200/api/notes");
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+            var notes = await response.Content.ReadAsStringAsync();
+            return Ok(JsonConvert.DeserializeObject(notes));
+        }
+ 
         // GET: api/ApiGateway/notes/patient/{patientId}
         [HttpGet("notes/patient/{patientId}")]
         public async Task<IActionResult> GetNotesByPatientId(string patientId)
@@ -59,7 +73,7 @@ namespace ApiGateway.Controllers
             var notes = await response.Content.ReadAsStringAsync();
             return Ok(JsonConvert.DeserializeObject(notes));
         }
-
+ 
         [HttpPost("notes")]
         public async Task<IActionResult> CreateNote([FromBody] NoteDTO note)
         {
@@ -73,7 +87,7 @@ namespace ApiGateway.Controllers
             var createdNote = await response.Content.ReadAsStringAsync();
             return CreatedAtAction(nameof(GetNotes), new { id = createdNote }, createdNote);
         }
-
+ 
         // GET: api/ApiGateway/riskassessment/{patientId}
         [HttpGet("riskassessment/{patientId}")]
         public async Task<IActionResult> AssessRisk(string patientId)

@@ -5,7 +5,19 @@ meta {
 }
 
 put {
-  url: http://localhost:5106/api/ApiGateway/patients
-  body: none
+  url: http://localhost:5106/api/ApiGateway/patients/1
+  body: json
   auth: none
+}
+
+body:json {
+  {
+      "id": "1",
+      "firstName": "John",
+      "lastName": "Doe",
+      "birthDate": "1980-01-01T00:00:00",
+      "gender": "Male",
+      "address": "123 Main St",
+      "phoneNumber": "123-456-7878"
+    }
 }

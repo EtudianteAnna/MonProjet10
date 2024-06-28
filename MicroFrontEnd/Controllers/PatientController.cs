@@ -41,6 +41,7 @@ namespace MicroFrontEnd.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Patient patient)
@@ -103,6 +104,24 @@ namespace MicroFrontEnd.Controllers
                 return Json(new List<Note>());
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetDiabetesRisk(string patientId)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:5106/api/ApiGateway/riskassessment/{patientId}");
+            var client = _clientFactory.CreateClient();
+
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var riskLevel = await response.Content.ReadAsStringAsync();
+                return Json(riskLevel);
+            }
+            else
+            {
+                return StatusCode((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddNote([FromBody] Note note)
@@ -129,5 +148,6 @@ namespace MicroFrontEnd.Controllers
 
             return StatusCode((int)response.StatusCode, responseContent);
         }
+   
     }
 }

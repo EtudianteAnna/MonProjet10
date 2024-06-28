@@ -23,7 +23,13 @@ namespace DiabetesRiskAssessment
             var patient = await _patientService.GetPatientByIdAsync(patientId);
             var notes = await _notesService.GetNotesByPatientIdAsync(patientId);
 
-            int triggerCount = notes.Count(note => DiabetesTriggerTerms.Terms.Any(term => note.Content.Contains(term)));
+            foreach (var note in notes)
+            {
+                Console.WriteLine($"Note: {note.Content}");
+            }
+
+            int triggerCount = notes.Count(note => DiabetesTriggerTerms.Terms.Any(term => note.Content.Contains(term, StringComparison.OrdinalIgnoreCase)));
+            Console.WriteLine($"Trigger Count: {triggerCount}");
 
             if (triggerCount == 0)
             {

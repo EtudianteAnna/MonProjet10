@@ -6,6 +6,16 @@ meta {
 
 post {
   url: http://localhost:5106/api/ApiGateway/notes
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "id": "667583a4e5d66b8ad0d3a256",
+    "patientId": "5",
+    "doctorId": "67891",
+    "content": "Patient shows improvement after treatment. Continue monitoring.",
+    "createdDate": "2023-06-13T10:30:00Z"
+  }
 }

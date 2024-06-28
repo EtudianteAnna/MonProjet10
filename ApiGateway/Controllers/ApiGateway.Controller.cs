@@ -103,19 +103,32 @@ namespace ApiGateway.Controllers
             var createdNote = await response.Content.ReadAsStringAsync();
             return CreatedAtAction(nameof(GetNotes), new { id = createdNote }, createdNote);
         }
- 
-        // GET: api/ApiGateway/riskassessment/{patientId}
+
         [HttpGet("riskassessment/{patientId}")]
         public async Task<IActionResult> AssessRisk(string patientId)
         {
             var client = _httpClientFactory.CreateClient();
             var response = await client.GetAsync($"http://localhost:6300/api/riskassessment/{patientId}");
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("Response Content: " + responseContent);
+
             if (!response.IsSuccessStatusCode)
             {
-                return StatusCode((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
+                return StatusCode((int)response.StatusCode, responseContent);
             }
-            var riskLevel = await response.Content.ReadAsStringAsync();
-            return Ok(JsonConvert.DeserializeObject(riskLevel));
+
+            try
+            {
+                var riskLevel = responseContent.Trim('\"'); // Assurez-vous d'obtenir une chaîne propre sans guillemets
+                return Ok(riskLevel);
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine("JSON Parsing Error: " + ex.Message);
+                return StatusCode(500, "Error parsing the response from the risk assessment API.");
+            }
         }
+
     }
 }

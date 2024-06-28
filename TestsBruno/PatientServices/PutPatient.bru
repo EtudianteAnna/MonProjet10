@@ -5,7 +5,19 @@ meta {
 }
 
 put {
-  url: http://localhost:3001/api/patient
-  body: none
+  url: http://localhost:3001/api/patients/1
+  body: json
   auth: none
+}
+
+body:json {
+  {
+      "id": "1",
+      "firstName": "Johnny",
+      "lastName": "Doe",
+      "birthDate": "1980-01-01T00:00:00",
+      "gender": "Male",
+      "address": "123 Main St",
+      "phoneNumber": "123-456-7878"
+    }
 }

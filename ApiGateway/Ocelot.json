@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 3001
+          "Port": 5000
         }
       ],
       "UpstreamPathTemplate": "/api/ApiGateway/patients",
@@ -18,7 +18,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 3001
+          "Port": 5000
         }
       ],
       "UpstreamPathTemplate": "/api/ApiGateway/patients/{id}",
@@ -30,7 +30,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 6200
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/api/ApiGateway/notes/patient/{patientId}",
@@ -42,7 +42,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 6300
+          "Port": 5002
         }
       ],
       "UpstreamPathTemplate": "/api/ApiGateway/riskassessment/{patientId}",

@@ -9,11 +9,17 @@ using System;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Configuration
+    .AddJsonFile("appsettings.DiabetesRiskAssessmentService.json", optional: true, reloadOnChange: true)
+
+    .AddJsonFile($"appsettings.DiabetesRiskAssessmentService.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHttpClient<IPatientService, PatientService>(client =>
+builder.Services.AddHttpClient<IPatientService, PatientServices>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:3001/"); // URL de votre service de patients
 });

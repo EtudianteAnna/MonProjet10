@@ -9,6 +9,7 @@
       "Patient-Services/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Tools": "6.0.31",
+          "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.20.1",
           "Pomelo.EntityFrameworkCore.MySql": "6.0.3",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
@@ -147,6 +148,7 @@
           }
         }
       },
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.20.1": {},
       "MySqlConnector/2.1.2": {
         "runtime": {
           "lib/net6.0/MySqlConnector.dll": {
@@ -356,6 +358,13 @@
       "sha512": "sha512-Nug3rO+7Kl5/SBAadzSMAVgqDlfGjJZ0GenQrLywJ84XGKO0uRqkunz5Wyl0SDwcR71bAATXvSdbdzPrYRYKGw==",
       "path": "microsoft.openapi/1.2.3",
       "hashPath": "microsoft.openapi.1.2.3.nupkg.sha512"
+    },
+    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.20.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-H4bIRdEOuyWBotgdPA5oCjJmUekWrtU5lOKnMAVaSNduZXHnqFZECsYbkm4vIOE4aeIO8TEYqfsZaJus1KknLQ==",
+      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.20.1",
+      "hashPath": "microsoft.visualstudio.azure.containers.tools.targets.1.20.1.nupkg.sha512"
     },
     "MySqlConnector/2.1.2": {
       "type": "package",

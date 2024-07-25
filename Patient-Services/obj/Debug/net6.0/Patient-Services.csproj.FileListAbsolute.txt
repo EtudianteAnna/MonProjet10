@@ -1,5 +1,5 @@
-C:\Users\A154NF\source\repos\MonProjet10\Patient-Services\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\A154NF\source\repos\MonProjet10\Patient-Services\bin\Debug\net6.0\appsettings.json
+C:\Users\A154NF\source\repos\MonProjet10\Patient-Services\bin\Debug\net6.0\appsettingspatient.Development.json
+C:\Users\A154NF\source\repos\MonProjet10\Patient-Services\bin\Debug\net6.0\appsettingspatient.json
 C:\Users\A154NF\source\repos\MonProjet10\Patient-Services\bin\Debug\net6.0\Patient-Services.exe
 C:\Users\A154NF\source\repos\MonProjet10\Patient-Services\bin\Debug\net6.0\Patient-Services.deps.json
 C:\Users\A154NF\source\repos\MonProjet10\Patient-Services\bin\Debug\net6.0\Patient-Services.runtimeconfig.json

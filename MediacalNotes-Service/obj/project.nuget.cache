@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BVNp3G/Tx7I=",
+  "dgSpecHash": "GtE04Vb57bc=",
   "success": true,
   "projectFilePath": "C:\\Users\\A154NF\\source\\repos\\MonProjet10\\MediacalNotes-Service\\MediacalNotes-Service.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\A154NF\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\A154NF\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\A154NF\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\A154NF\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.20.1\\microsoft.visualstudio.azure.containers.tools.targets.1.20.1.nupkg.sha512",
     "C:\\Users\\A154NF\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\A154NF\\.nuget\\packages\\mongodb.bson\\2.26.0\\mongodb.bson.2.26.0.nupkg.sha512",
     "C:\\Users\\A154NF\\.nuget\\packages\\mongodb.driver\\2.26.0\\mongodb.driver.2.26.0.nupkg.sha512",

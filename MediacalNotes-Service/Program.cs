@@ -15,7 +15,12 @@ namespace MedicalNotesService
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Configuration des fichiers appsettings
+            builder.Configuration
+                .AddJsonFile("appsettingsMediacal.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettingsMediacal.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+            // Ajouter les services au conteneur
             builder.Services.AddControllers();
             builder.Services.Configure<MongoDbSettings>(
                 builder.Configuration.GetSection(nameof(MongoDbSettings)));
@@ -23,17 +28,17 @@ namespace MedicalNotesService
             builder.Services.AddScoped<INoteRepository, NoteRepository>();
             builder.Services.AddScoped<INoteService, NoteService>();
 
-            // Add Swagger
+            // Ajouter Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Add the following line to support logging
+            // Ajouter la prise en charge de la journalisation
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configurer le pipeline de requêtes HTTP
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -41,7 +46,7 @@ namespace MedicalNotesService
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Medical Notes API V1");
-                    c.RoutePrefix = string.Empty; // To access Swagger directly at the root URL
+                    c.RoutePrefix = string.Empty; // Pour accéder à Swagger directement à l'URL racine
                 });
             }
 
@@ -55,4 +60,3 @@ namespace MedicalNotesService
         }
     }
 }
-

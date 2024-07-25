@@ -3,8 +3,12 @@ using PatientService.Data;
 using PatientService.Repositories;
 using PatientService.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+// Ajouter la configuration des fichiers appsettings
+builder.Configuration
+    .AddJsonFile("appsettingspatient.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettingspatient.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -31,7 +35,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Patient API V1");
-        
     });
 }
 

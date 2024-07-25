@@ -1,5 +1,5 @@
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\appsettings.json
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\appsettingsmediacal.Development.json
+C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\appsettingsMediacal.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\Notes\bruno.json
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\MediacalNotes-Service.exe
 C:\Users\A154NF\source\repos\MonProjet10\MediacalNotes-Service\bin\Debug\net6.0\MediacalNotes-Service.deps.json

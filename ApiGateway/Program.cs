@@ -6,19 +6,22 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+// Ajoutez des fichiers de configuration supplémentaires.
+builder.Configuration
+    .AddJsonFile("appsettingsapigateway.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettingsapigateway.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
+// Ajoutez les services nécessaires.
 builder.Services.AddOcelot();
-
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
-
-// Add Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Configure le pipeline de requêtes HTTP.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -45,4 +48,3 @@ app.UseWhen(context => !context.Request.Path.StartsWithSegments("/swagger"), sub
 });
 
 app.Run();
-

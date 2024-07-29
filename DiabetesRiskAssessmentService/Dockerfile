@@ -1,22 +1,26 @@
-# Stage 1: Build the application
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["DiabetesRiskAssessmentService/DiabetesRiskAssessmentService.csproj", "DiabetesRiskAssessmentService/"]
-RUN dotnet restore "./DiabetesRiskAssessmentService/DiabetesRiskAssessmentService.csproj"
-COPY . .
-WORKDIR "/src/DiabetesRiskAssessmentService"
-RUN dotnet build "./DiabetesRiskAssessmentService.csproj" -c $BUILD_CONFIGURATION -o /app/build
- 
-# Stage 2: Publish the application
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./DiabetesRiskAssessmentService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
- 
-# Stage 3: Build the runtime image
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["DiabetesRiskAssessmentService/DiabetesRiskAssessmentService.csproj", "DiabetesRiskAssessmentService/"]
+COPY ["MediacalNotes-Service/MediacalNotes-Service.csproj", "MediacalNotes-Service/"]
+COPY ["Patient-Services/Patient-Services.csproj", "Patient-Services/"]
+RUN dotnet restore "./DiabetesRiskAssessmentService/DiabetesRiskAssessmentService.csproj"
+COPY . .
+WORKDIR "/src/DiabetesRiskAssessmentService"
+RUN dotnet build "./DiabetesRiskAssessmentService.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./DiabetesRiskAssessmentService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DiabetesRiskAssessmentService.dll"]

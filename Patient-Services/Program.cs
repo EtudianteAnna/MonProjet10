@@ -17,9 +17,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Ajouter la configuration de la base de données MySQL
-builder.Services.AddDbContext<PatientContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(8, 0, 23)))); // Mettre la version MySQL appropriée
+//builder.Services.AddDbContext<PatientContext>(options =>
+//    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+//        new MySqlServerVersion(new Version(8, 0, 23)))); // Mettre la version MySQL appropriée
+
+// Add database connection
+var host = Environment.GetEnvironmentVariable("DB_HOST");
+var port = Environment.GetEnvironmentVariable("DB_PORT");
+var database = Environment.GetEnvironmentVariable("DB_NAME");
+var user = Environment.GetEnvironmentVariable("DB_USER");
+var password = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+var connectionString = $"server={host};uid={user};pwd={password};database={database}";
+//$"Server={host}, {port}; Initial Catalog = {database}; User ID = {user}; password ={password}; TrustServerCertificate=True";
+builder.Services.AddDbContext<PatientContext>(option => option.UseMySql());
 
 // Ajouter les services et les repositories
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();

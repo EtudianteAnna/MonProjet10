@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "sZx+FlgSnj9Vc3LdqfLEpR2yF3kXLlSt64dDqD3WyIQ=",
+  "Hash": "YF92vclFBRZiL42K0LB3p0rBUic/TTT/ufAo9ZiWyY8=",
   "Source": "DiabetesRiskAssessmentService",
   "BasePath": "_content/DiabetesRiskAssessmentService",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\A154NF\\source\\repos\\MonProjet10\\MediacalNotes-Service\\MediacalNotes-Service.csproj",
+      "Identity": "C:\\Users\\A141QT\\source\\repos\\Anna-MonProjet10\\MediacalNotes-Service\\MediacalNotes-Service.csproj",
       "Version": 2,
       "Source": "MediacalNotes-Service",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
@@ -18,7 +18,7 @@
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
     },
     {
-      "Identity": "C:\\Users\\A154NF\\source\\repos\\MonProjet10\\Patient-Services\\Patient-Services.csproj",
+      "Identity": "C:\\Users\\A141QT\\source\\repos\\Anna-MonProjet10\\Patient-Services\\Patient-Services.csproj",
       "Version": 2,
       "Source": "Patient-Services",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

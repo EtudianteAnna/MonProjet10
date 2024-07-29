@@ -1,0 +1,97 @@
+name: dockercompose4399365744644332726
+services:
+  apigateway:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: Dockerfile
+      args:
+        BUILD_CONFIGURATION: Release
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: ApiGateway
+    container_name: ApiGateway
+    entrypoint:
+      - C:\remote_debugger\x64\msvsmon.exe
+      - /noauth
+      - /anyuser
+      - /silent
+      - /nostatus
+      - /noclrwarn
+      - /nosecuritywarn
+      - /nofirewallwarn
+      - /nowowwarn
+      - /fallbackloadremotemanagedpdbs
+      - /timeout:2147483646
+      - /LogDebuggeeOutputToStdOut
+    labels:
+      com.microsoft.visual-studio.project-name: ApiGateway
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath c:\.nuget\packages --additionalProbingPath c:\.nuget\fallbackpackages --additionalProbingPath c:\.nuget\fallbackpackages2  "C:\app\ApiGateway.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: dotnet --roll-forward Major C:\VSTools\DistrolessHelper\DistrolessHelper.dll --stop dotnet
+      com.microsoft.visualstudio.debuggee.program: '"C:\Program Files\dotnet\dotnet.exe"'
+      com.microsoft.visualstudio.debuggee.workingdirectory: C:\app
+    networks:
+      default: null
+    volumes:
+      - type: bind
+        source: C:\Users\A141QT\onecoremsvsmon\17.10.20419.3425
+        target: c:\remote_debugger
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\A141QT\AppData\Roaming\ASP.NET\Https
+        target: C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\A141QT\AppData\Roaming\Microsoft\UserSecrets
+        target: C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\win-x64\net6.0
+        target: C:\VSTools
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\HotReload
+        target: C:\HotReloadAgent
+        read_only: true
+        bind:
+          create_host_path: true
+  patient-services:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: Patient-Services/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: patientservices
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        protocol: tcp
+      - mode: ingress
+        target: 443
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\A141QT\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\A141QT\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose4399365744644332726_default

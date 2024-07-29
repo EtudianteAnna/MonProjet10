@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>7a6f8820-6043-4307-9bb5-d61e13265087</UserSecretsId>
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,9 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApiGateway\ApiGateway.csproj" />
-    <ProjectReference Include="..\DiabetesRiskAssessmentService\DiabetesRiskAssessmentService.csproj" />
-    <ProjectReference Include="..\MediacalNotes-Service\MediacalNotes-Service.csproj" />
     <ProjectReference Include="..\Patient-Services\Patient-Services.csproj" />
   </ItemGroup>
 

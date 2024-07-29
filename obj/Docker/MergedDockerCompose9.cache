@@ -1,0 +1,168 @@
+name: dockercompose4399365744644332726
+services:
+  api-gateway:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: ApiGateway/Dockerfile
+    depends_on:
+      diabetes-risk-assessment:
+        condition: service_started
+        required: true
+      medicalnotes-service:
+        condition: service_started
+        required: true
+      patient-services:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: api-gateway:latest
+    networks:
+      my_network: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5003"
+        protocol: tcp
+  diabetes-risk-assessment:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: DiabetesRiskAssessmentService/Dockerfile
+    depends_on:
+      mongo_db:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      MongoDbSettings__ConnectionString: mongodb://root:example@mongo_db:27017/
+      MongoDbSettings__DatabaseName: diabetesdb
+    image: diabetes-risk-assessment:latest
+    networks:
+      my_network: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5002"
+        protocol: tcp
+  medicalnotes-service:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: MediacalNotes-Service/Dockerfile
+    depends_on:
+      mongo_db:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      MongoDbSettings__ConnectionString: mongodb://root:example@mongo_db:27017/
+      MongoDbSettings__DatabaseName: Notes
+    image: medicalnotes-service:latest
+    networks:
+      my_network: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5001"
+        protocol: tcp
+  microfrontend:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: MicroFrontEnd/Dockerfile
+    depends_on:
+      api-gateway:
+        condition: service_started
+        required: true
+    image: microfrontend:latest
+    networks:
+      my_network: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5004"
+        protocol: tcp
+  mongo_db:
+    container_name: mongo_db
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: root
+    image: mongo
+    networks:
+      my_network: null
+    ports:
+      - mode: ingress
+        target: 27017
+        published: "27017"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: mongo_data
+        target: /data/db
+        volume: {}
+  mysql_db:
+    container_name: mysql_db
+    environment:
+      DB_HOST: patient-services
+      DB_NAME: patientDB
+      DB_PASSWORD: Password@12345#
+      DB_PORT: "3306"
+      DB_USER: root
+    image: mysql:8.0
+    networks:
+      my_network: null
+    ports:
+      - mode: ingress
+        target: 3306
+        published: "3306"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: mysql_data
+        target: /var/lib/mysql
+        volume: {}
+  patient-services:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: Patient-Services/Dockerfile
+    depends_on:
+      mysql_db:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      MYSQL_ROOT_PASSWORD: Password@12345#
+    image: patient-services:latest
+    networks:
+      my_network: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5000"
+        protocol: tcp
+      - mode: ingress
+        target: 80
+        protocol: tcp
+      - mode: ingress
+        target: 443
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\A141QT\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\A141QT\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+networks:
+  my_network:
+    name: dockercompose4399365744644332726_my_network
+volumes:
+  mongo_data:
+    name: dockercompose4399365744644332726_mongo_data
+  mysql_data:
+    name: dockercompose4399365744644332726_mysql_data

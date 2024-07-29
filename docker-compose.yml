@@ -13,6 +13,8 @@ services:
       #- ASPNETCORE_ENVIRONMENT=Development
       #- ConnectionStrings__DefaultConnection=Server=mysql_db;Database=PatientDB;User=root;Password=Jemeconnecte24!;
       - MYSQL_ROOT_PASSWORD=Password@12345#
+    networks:
+      - my_network
  
   medicalnotes-service:
     image: medicalnotes-service:latest
@@ -27,6 +29,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - MongoDbSettings__ConnectionString=mongodb://root:example@mongo_db:27017/
       - MongoDbSettings__DatabaseName=Notes
+    networks:
+      - my_network
  
   diabetes-risk-assessment:
     image: diabetes-risk-assessment:latest
@@ -41,6 +45,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - MongoDbSettings__ConnectionString=mongodb://root:example@mongo_db:27017/
       - MongoDbSettings__DatabaseName=diabetesdb
+    networks:
+      - my_network
  
   api-gateway:
     image: api-gateway:latest
@@ -55,6 +61,8 @@ services:
       - diabetes-risk-assessment
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - my_network
  
   microfrontend:
     image: microfrontend:latest
@@ -65,6 +73,8 @@ services:
       - "5004:80"
     depends_on:
       - api-gateway
+    networks:
+      - my_network
  
   mysql_db:
     image: mysql:8.0
@@ -79,6 +89,8 @@ services:
       - DB_PASSWORD=Password@12345#
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - my_network
  
   mongo_db:
     image: mongo
@@ -90,11 +102,14 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - mongo_data:/data/db
+    networks:
+      - my_network
  
 networks:
-  default:
-    external:
-      name: my_network
+    my_network:
+  #default:
+   # external:
+    #  name: my_network
  
 volumes:
   mysql_data:

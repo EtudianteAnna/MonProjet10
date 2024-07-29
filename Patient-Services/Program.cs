@@ -28,7 +28,7 @@ var host = Environment.GetEnvironmentVariable("DB_HOST");
 var port = Environment.GetEnvironmentVariable("DB_PORT");
 var database = Environment.GetEnvironmentVariable("DB_NAME");
 var user = Environment.GetEnvironmentVariable("DB_USER");
-var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+var password = Environment.GetEnvironmentVariable("MYSQL_ROOT_PASSWORD");
 var connectionString = $"server={host};port={port};database={database};user={user};password={password}";
 
 builder.Services.AddDbContext<PatientContext>(option => option.UseMySQL(connectionString));

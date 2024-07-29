@@ -77,7 +77,7 @@ services:
       - my_network
  
   mysql_db:
-    image: mysql:8.0
+    image: mysql:8.0.29-oracle
     container_name: mysql_db
     ports:
       - "3306:3306"
@@ -86,7 +86,7 @@ services:
       - DB_PORT=3306
       - DB_NAME=patientDB
       - DB_USER=root
-      - DB_PASSWORD=Password@12345#
+      - MYSQL_ROOT_PASSWORD=Password@12345#
     volumes:
       - mysql_data:/var/lib/mysql
     networks:

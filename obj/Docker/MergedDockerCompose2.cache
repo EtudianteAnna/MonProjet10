@@ -1,44 +1,144 @@
 name: dockercompose4399365744644332726
 services:
-  apigateway:
+  api-gateway:
     build:
       context: C:\Users\A141QT\source\repos\Anna-MonProjet10
-      dockerfile: ApiGateway\Dockerfile
-      args:
-        BUILD_CONFIGURATION: Debug
-      labels:
-        com.microsoft.created-by: visual-studio
-        com.microsoft.visual-studio.project-name: ApiGateway
-      target: base
-    container_name: ApiGateway
-    entrypoint:
-      - C:\remote_debugger\x64\msvsmon.exe
-      - /noauth
-      - /anyuser
-      - /silent
-      - /nostatus
-      - /noclrwarn
-      - /nosecuritywarn
-      - /nofirewallwarn
-      - /nowowwarn
-      - /timeout:2147483646
-      - /LogDebuggeeOutputToStdOut
+      dockerfile: ApiGateway/Dockerfile
+    depends_on:
+      diabetes-risk-assessment:
+        condition: service_started
+        required: true
+      medicalnotes-service:
+        condition: service_started
+        required: true
+      patient-services:
+        condition: service_started
+        required: true
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
-      ASPNETCORE_URLS: https://+:443;http://+:80
-      DOTNET_USE_POLLING_FILE_WATCHER: "1"
-      NUGET_FALLBACK_PACKAGES: c:\.nuget\fallbackpackages;c:\.nuget\fallbackpackages2
-      NUGET_PACKAGES: C:\.nuget\packages
-    image: apigateway:dev
-    labels:
-      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath c:\.nuget\packages --additionalProbingPath c:\.nuget\fallbackpackages --additionalProbingPath c:\.nuget\fallbackpackages2  "C:\app\bin\Debug\net6.0\ApiGateway.dll"'
-      com.microsoft.visualstudio.debuggee.killprogram: dotnet --roll-forward Major C:\VSTools\DistrolessHelper\DistrolessHelper.dll --stop dotnet
-      com.microsoft.visualstudio.debuggee.program: '"C:\Program Files\dotnet\dotnet.exe"'
-      com.microsoft.visualstudio.debuggee.workingdirectory: C:\app
+    image: api-gateway:latest
     networks:
       default: null
     ports:
+      - mode: ingress
+        target: 80
+        published: "5003"
+        protocol: tcp
+  diabetes-risk-assessment:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: DiabetesRiskAssessmentService/Dockerfile
+    depends_on:
+      mongo_db:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      MongoDbSettings__ConnectionString: mongodb://root:example@mongo_db:27017/
+      MongoDbSettings__DatabaseName: diabetesdb
+    image: diabetes-risk-assessment:latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5002"
+        protocol: tcp
+  medicalnotes-service:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: MediacalNotes-Service/Dockerfile
+    depends_on:
+      mongo_db:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      MongoDbSettings__ConnectionString: mongodb://root:example@mongo_db:27017/
+      MongoDbSettings__DatabaseName: Notes
+    image: medicalnotes-service:latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5001"
+        protocol: tcp
+  microfrontend:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: MicroFrontEnd/Dockerfile
+    depends_on:
+      api-gateway:
+        condition: service_started
+        required: true
+    image: microfrontend:latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5004"
+        protocol: tcp
+  mongo_db:
+    container_name: mongo_db
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: root
+    image: mongo
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 27017
+        published: "27017"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: mongo_data
+        target: /data/db
+        volume: {}
+  mysql_db:
+    container_name: mysql_db
+    environment:
+      DB_HOST: patient-services
+      DB_NAME: patientDB
+      DB_PORT: "3306"
+      DB_SA_PASSWORD: Password@12345#
+      DB_USER: root
+    image: mysql:8.0
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 3306
+        published: "3306"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: mysql_data
+        target: /var/lib/mysql
+        volume: {}
+  patient-services:
+    build:
+      context: C:\Users\A141QT\source\repos\Anna-MonProjet10
+      dockerfile: Patient-Services/Dockerfile
+    depends_on:
+      mysql_db:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      ConnectionStrings__DefaultConnection: Server=mysql_db;Database=PatientDB;User=root;Password=Jemeconnecte24!;
+    image: patient-services:latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5000"
+        protocol: tcp
       - mode: ingress
         target: 80
         protocol: tcp
@@ -47,63 +147,23 @@ services:
         protocol: tcp
     volumes:
       - type: bind
-        source: C:\Users\A141QT\AppData\Roaming\Microsoft\UserSecrets
-        target: C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets
+        source: C:\Users\A141QT\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
         read_only: true
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\A141QT\AppData\Roaming\ASP.NET\Https
-        target: C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\A141QT\source\repos\Anna-MonProjet10\ApiGateway
-        target: c:\app
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\A141QT\source\repos\Anna-MonProjet10
-        target: c:\src
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\A141QT\onecoremsvsmon\17.10.20419.3425
-        target: c:\remote_debugger
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Users\A141QT\.nuget\packages
-        target: c:\.nuget\packages
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages
-        target: c:\.nuget\fallbackpackages
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Program Files\dotnet\sdk\NuGetFallbackFolder
-        target: c:\.nuget\fallbackpackages2
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\win-x64\net6.0
-        target: C:\VSTools
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\HotReload
-        target: C:\HotReloadAgent
+        source: C:\Users\A141QT\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
         read_only: true
         bind:
           create_host_path: true
 networks:
   default:
-    name: dockercompose4399365744644332726_default
+    name: my_network
+    external: true
+volumes:
+  mongo_data:
+    name: dockercompose4399365744644332726_mongo_data
+  mysql_data:
+    name: dockercompose4399365744644332726_mysql_data

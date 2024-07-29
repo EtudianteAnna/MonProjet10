@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MediacalNotes-Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6d74268a5015671f84fb59863bad2a3794a5922")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+940504e39b4386eaeecb4988249ba15307bd7191")]
 [assembly: System.Reflection.AssemblyProductAttribute("MediacalNotes-Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MediacalNotes-Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

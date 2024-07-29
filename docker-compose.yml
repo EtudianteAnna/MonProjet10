@@ -10,8 +10,9 @@ services:
     depends_on:
       - mysql_db
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=mysql_db;Database=PatientDB;User=root;Password=Jemeconnecte24!;
+      #- ASPNETCORE_ENVIRONMENT=Development
+      #- ConnectionStrings__DefaultConnection=Server=mysql_db;Database=PatientDB;User=root;Password=Jemeconnecte24!;
+      - MYSQL_ROOT_PASSWORD=Password@12345#
  
   medicalnotes-service:
     image: medicalnotes-service:latest
@@ -71,11 +72,11 @@ services:
     ports:
       - "3306:3306"
     environment:
-      DatabaseServer: patient-service
-      DatabasePort: 1433
-      DatabaseUser: SA
-      DatabasePassword: Password@12345#
-      DatabaseName: patientDB
+      - DB_HOST=patient-services
+      - DB_PORT=3306
+      - DB_NAME=patientDB
+      - DB_USER=root
+      - DB_PASSWORD=Password@12345#
     volumes:
       - mysql_data:/var/lib/mysql
  

@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using PatientService.Data;
 using PatientService.Repositories;
 using PatientService.Services;
@@ -26,10 +28,10 @@ var host = Environment.GetEnvironmentVariable("DB_HOST");
 var port = Environment.GetEnvironmentVariable("DB_PORT");
 var database = Environment.GetEnvironmentVariable("DB_NAME");
 var user = Environment.GetEnvironmentVariable("DB_USER");
-var password = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
-var connectionString = $"server={host};uid={user};pwd={password};database={database}";
-//$"Server={host}, {port}; Initial Catalog = {database}; User ID = {user}; password ={password}; TrustServerCertificate=True";
-builder.Services.AddDbContext<PatientContext>(option => option.UseMySql());
+var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+var connectionString = $"server={host};port={port};database={database};user={user};password={password}";
+
+builder.Services.AddDbContext<PatientContext>(option => option.UseMySQL(connectionString));
 
 // Ajouter les services et les repositories
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
